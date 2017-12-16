@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.pranburiorchard.netfirms.simpleandroidocr.MainActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:weightSum="2">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <Button
+                    android:id="@+id/game_clear_btn"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/result_txt"
+                    android:layout_marginEnd="33dp"
+                    android:layout_toStartOf="@+id/result_txt"
+                    android:text="Clear"
+                    tools:layout_editor_absoluteX="100dp"
+                    tools:layout_editor_absoluteY="529dp" />
+
+                <TextView
+                    android:id="@+id/result_txt"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:layout_centerVertical="true"
+                    android:text="?"
+                    android:textSize="70sp" />
+
+                <Button
+                    android:id="@+id/game_ok_btn"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignBottom="@+id/game_clear_btn"
+                    android:layout_marginStart="36dp"
+                    android:layout_toEndOf="@+id/result_txt"
+                    android:text="OK" />
+            </RelativeLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@android:color/darker_gray"
+            android:gravity="center_vertical|center_horizontal"
+            android:orientation="horizontal">
+
+            <com.pranburiorchard.netfirms.simpleandroidocr.customview.WritingView                android:id="@+id/writingView"
+                android:layout_width="240dp"
+                android:layout_height="240dp"
+                android:background="@android:color/white"
+                app:layout_constraintRight_toRightOf="parent"
+                tools:layout_editor_absoluteY="199dp" />
+        </LinearLayout>
+    </LinearLayout>
+
+</android.support.constraint.ConstraintLayout>
