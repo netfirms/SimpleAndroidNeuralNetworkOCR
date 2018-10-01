@@ -12,15 +12,10 @@
         android:orientation="vertical"
         android:weightSum="2">
 
-        <LinearLayout
+        <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:orientation="vertical">
-
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent">
+            android:layout_weight="1">
 
                 <Button
                     android:id="@+id/game_clear_btn"
@@ -29,7 +24,7 @@
                     android:layout_below="@+id/result_txt"
                     android:layout_marginEnd="33dp"
                     android:layout_toStartOf="@+id/result_txt"
-                    android:text="Clear"
+                    android:text="@string/clear"
                     tools:layout_editor_absoluteX="100dp"
                     tools:layout_editor_absoluteY="529dp" />
 
@@ -39,7 +34,7 @@
                     android:layout_height="wrap_content"
                     android:layout_centerHorizontal="true"
                     android:layout_centerVertical="true"
-                    android:text="?"
+                    android:text="@string/questionMark"
                     android:textSize="70sp" />
 
                 <Button
@@ -49,9 +44,8 @@
                     android:layout_alignBottom="@+id/game_clear_btn"
                     android:layout_marginStart="36dp"
                     android:layout_toEndOf="@+id/result_txt"
-                    android:text="OK" />
-            </RelativeLayout>
-        </LinearLayout>
+                    android:text="@string/ok" />
+        </RelativeLayout>
 
         <LinearLayout
             android:layout_width="match_parent"

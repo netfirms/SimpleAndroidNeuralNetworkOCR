@@ -8,7 +8,6 @@ import android.graphics.Paint;
 import android.graphics.Path;
 import android.os.Environment;
 import android.util.AttributeSet;
-import android.util.DisplayMetrics;
 import android.view.MotionEvent;
 import android.view.View;
 
@@ -33,13 +32,10 @@ public class WritingView extends View {
 
     private Paint mPaint;
     private Path mPath;
-    private Bitmap mBitmap;
     private Canvas mCanvas;
-    private Context context;
 
     private NeuralNetwork nnet;
-    private ImageRecognitionPlugin imageRecognition;
-    private Runnable loadDataRunnable = new Runnable() {
+    private final Runnable loadDataRunnable = new Runnable() {
         public void run() {
             InputStream irs = getResources().openRawResource(R.raw.m1);
             nnet = NeuralNetwork.load(irs);
@@ -48,17 +44,15 @@ public class WritingView extends View {
 
     public WritingView(Context context) {
         super(context);
-        this.context = context;
         init();
     }
 
     public WritingView(Context context, AttributeSet attrs) {
         super(context, attrs);
-        this.context = context;
         init();
     }
 
-    public void init() {
+    private void init() {
         loadData();
         // Init Neural Network instance
         mPaint = new Paint();
@@ -69,7 +63,6 @@ public class WritingView extends View {
         mPaint.setStrokeWidth(50);
         mPath = new Path();
         mCanvas = new Canvas();
-        DisplayMetrics metrics = this.context.getResources().getDisplayMetrics();
     }
 
     @Override
@@ -80,6 +73,7 @@ public class WritingView extends View {
 
     @Override
     public boolean onTouchEvent(MotionEvent event) {
+        super.onTouchEvent(event);
 
         switch (event.getAction()) {
 
@@ -102,7 +96,7 @@ public class WritingView extends View {
     @Override
     protected void onSizeChanged(int w, int h, int oldw, int oldh) {
         super.onSizeChanged(w, h, oldw, oldh);
-        mBitmap = Bitmap.createBitmap(w, h, Bitmap.Config.ARGB_8888);
+        Bitmap mBitmap = Bitmap.createBitmap(w, h, Bitmap.Config.ARGB_8888);
         mCanvas = new Canvas(mBitmap);
     }
 
@@ -141,13 +135,15 @@ public class WritingView extends View {
             e.printStackTrace();
         }
         this.setDrawingCacheEnabled(false);
+        b2.recycle();
+        newBitmap.recycle();
         return characterVerify(file);
     }
 
     private String characterVerify(File image) {
         HashMap<String, Double> output = null;
         try {
-            imageRecognition = (ImageRecognitionPlugin) nnet.getPlugin(ImageRecognitionPlugin.class);
+            ImageRecognitionPlugin imageRecognition = (ImageRecognitionPlugin) nnet.getPlugin(ImageRecognitionPlugin.class);
             output = imageRecognition.recognizeImage(image);
         } catch (IOException e) {
             e.printStackTrace();
