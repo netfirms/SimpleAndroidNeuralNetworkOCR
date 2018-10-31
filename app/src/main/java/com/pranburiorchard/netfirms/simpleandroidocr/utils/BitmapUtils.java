@@ -66,7 +66,7 @@ public class BitmapUtils {
         }
         int width = maxX - minX;
         int height = maxY - minY;
-        if (width > 0 && height > 0)
+        if (width > 0 && height > 0 && minY > 0)
             bitmap2 = Bitmap.createBitmap(bitmap2, minX, minY, width, height);
 
         return bitmap2;
